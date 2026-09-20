@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Ayati Mathur — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0e0f11;
+    --surface: #16181c;
+    --surface2: #1e2127;
+    --border: #2a2d35;
+    --text: #e8eaf0;
+    --muted: #7a7f8e;
+    --accent: #6c8cff;
+    --accent2: #a78bfa;
+    --green: #4ade80;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: env(safe-area-inset-top,0); left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(14,15,17,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-left {}
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--accent);
+    background: rgba(108,140,255,0.1);
+    border: 1px solid rgba(108,140,255,0.25);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--accent2); }
+  .hero-bio {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+  .hero-cta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #5a7aff; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+
+  /* HERO RIGHT — Live GitHub card */
+  .hero-right {}
+  .github-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .github-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .gh-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .gh-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    border: 2px solid var(--border);
+    object-fit: cover;
+  }
+  .gh-name { font-weight: 600; font-size: 16px; }
+  .gh-handle { font-size: 13px; color: var(--muted); }
+  .gh-bio { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .gh-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 20px;
+  }
+  .gh-stat {
+    background: var(--surface2);
+    border-radius: 10px; padding: 14px 12px; text-align: center;
+  }
+  .gh-stat-num { font-size: 22px; font-family: var(--serif); color: var(--text); }
+  .gh-stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .gh-link {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .gh-link:hover { background: rgba(108,140,255,0.1); }
+  .loading-text { color: var(--muted); font-size: 13px; font-style: italic; }
+
+  /* SECTIONS COMMON */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 40px);
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  /* SKILLS */
+  #skills { border-top: 1px solid var(--border); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .skill-group-name {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* PROJECTS */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .project-card-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .project-icon { font-size: 28px; }
+  .project-lang {
+    font-size: 11px; font-weight: 500;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 3px 8px; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .project-name {
+    font-size: 16px; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .project-desc {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 18px;
+  }
+  .project-footer {
+    display: flex; align-items: center; gap: 16px;
+    font-size: 12px; color: var(--muted);
+  }
+  .star-count { display: flex; align-items: center; gap: 4px; }
+  .no-repos-msg { color: var(--muted); font-style: italic; font-size: 14px; }
+
+  /* ABOUT */
+  #about { border-top: 1px solid var(--border); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-aside {}
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .stat-card-icon { font-size: 28px; }
+  .stat-card-label { font-size: 13px; color: var(--muted); }
+  .stat-card-value { font-size: 16px; font-weight: 600; color: var(--text); }
+
+  /* CONNECT */
+  #connect { border-top: 1px solid var(--border); text-align: center; }
+  .connect-inner { max-width: 520px; margin: 0 auto; }
+  .connect-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .connect-sub { color: var(--muted); font-size: 15px; margin-bottom: 36px; }
+  .connect-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+  /* RESUME BTN */
+  .btn-resume {
+    background: transparent;
+    color: var(--green);
+    border: 1px solid rgba(74,222,128,0.35);
+  }
+  .btn-resume:hover { background: rgba(74,222,128,0.08); transform: translateY(-1px); }
+  .btn-resume.disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* CONTACT FORM */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .contact-info h3 {
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 400;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .contact-info p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+  .contact-detail {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-detail:hover { color: var(--accent); }
+  .contact-detail svg { opacity: 0.6; flex-shrink: 0; }
+
+  .contact-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative; overflow: hidden;
+  }
+  .contact-form::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 12px; font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 7px;
+    letter-spacing: 0.02em;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: var(--muted); opacity: 0.5; }
+  .form-group textarea { min-height: 110px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .form-submit:hover { background: #5a7aff; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 32px 0;
+  }
+  .form-success .success-icon { font-size: 40px; margin-bottom: 14px; }
+  .form-success h4 { font-family: var(--serif); font-size: 22px; color: var(--text); margin-bottom: 8px; }
+  .form-success p { color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form { padding: 24px; }
+  }
+  .connect-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--surface);
+    transition: all 0.2s;
+  }
+  .connect-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(108,140,255,0.05); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    #hero { padding: 100px 20px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    section { padding: 60px 20px; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .gh-stats { grid-template-columns: repeat(3,1fr); }
+    footer { padding: 24px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">Ayati Mathur</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Open to opportunities</div>
+      <h1>Ayati<br/><em>Mathur</em></h1>
+      <p class="hero-bio">
+        B.Sc. (Hons) Mathematics student at Daulat Ram College, University of Delhi.
+        I build at the intersection of <strong style="color:var(--text)">pure mathematics</strong> and <strong style="color:var(--text)">data science</strong> — turning rigorous theory into practical insight.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn btn-resume" href="#" id="resume-btn" title="Upload your resume PDF to enable this">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Resume / CV
+        </a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/ayatimathur03/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/ayatimathur3" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="github-card">
+        <div class="gh-header">
+          <img class="gh-avatar" src="https://avatars.githubusercontent.com/u/331513551?v=4" alt="Ayati Mathur"/>
+          <div>
+            <div class="gh-name">Ayati Mathur</div>
+            <div class="gh-handle">@ayatimathur3</div>
+          </div>
+        </div>
+        <div class="gh-bio">BSc (Hons) Mathematics · Daulat Ram College, University of Delhi</div>
+        <div class="gh-stats" id="gh-stats">
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-repos">—</div><div class="gh-stat-label">Repos</div></div>
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-followers">—</div><div class="gh-stat-label">Followers</div></div>
+          <div class="gh-stat"><div class="gh-stat-num" id="gh-following">—</div><div class="gh-stat-label">Following</div></div>
+        </div>
+        <a class="gh-link" href="https://github.com/ayatimathur3" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.48 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          View GitHub Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-name">Mathematics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Real Analysis</span>
+        <span class="skill-tag">Linear Algebra</span>
+        <span class="skill-tag">Calculus</span>
+        <span class="skill-tag">Proof Writing</span>
+        <span class="skill-tag">Statistics</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Data Science</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Data Analytics</span>
+        <span class="skill-tag">Visualization</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">Jupyter</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">LaTeX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-name">Learning</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Scikit-learn</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid" id="projects-grid">
+    <p class="loading-text">Loading repositories from GitHub...</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm <strong>Ayati Mathur</strong>, a Mathematics honours student at Daulat Ram College, University of Delhi. My academic journey lives between the rigour of formal proofs and the practicality of data-driven systems.</p>
+      <p>I'm drawn to problems where <strong>mathematical structure unlocks analytical clarity</strong> — whether that's understanding the topology of a function's convergence or building a clean data pipeline that tells a clear story.</p>
+      <p>Outside coursework, I'm building toward a career in <strong>data science and analytics</strong>, driven by the belief that the best data scientists are the ones who actually understand the math underneath.</p>
+    </div>
+    <div class="about-aside">
+      <div class="stat-card">
+        <div class="stat-card-icon">🎓</div>
+        <div>
+          <div class="stat-card-label">Currently studying</div>
+          <div class="stat-card-value">BSc (Hons) Mathematics</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">🏛️</div>
+        <div>
+          <div class="stat-card-label">Institution</div>
+          <div class="stat-card-value">Daulat Ram College, Delhi University</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">📍</div>
+        <div>
+          <div class="stat-card-label">Based in</div>
+          <div class="stat-card-value">India</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-icon">🎯</div>
+        <div>
+          <div class="stat-card-label">Focused on</div>
+          <div class="stat-card-value">Data Science & Analytics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <h2 class="section-title">Get in touch</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Let's work on something together</h3>
+      <p>Whether it's a data science project, a math discussion, an internship opportunity, or just a hello — my inbox is open.</p>
+      <a class="contact-detail" href="https://github.com/ayatimathur3" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.48 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        github.com/ayatimathur3
+      </a>
+      <a class="contact-detail" href="https://www.linkedin.com/in/ayatimathur03/" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        linkedin.com/in/ayatimathur03
+      </a>
+    </div>
+
+    <div class="contact-form" id="contact-form-wrap">
+      <div id="form-fields">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-name">Name</label>
+            <input type="text" id="f-name" placeholder="Your name" autocomplete="name"/>
+          </div>
+          <div class="form-group">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" placeholder="you@example.com" autocomplete="email"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="f-subject">Subject</label>
+          <input type="text" id="f-subject" placeholder="What's this about?"/>
+        </div>
+        <div class="form-group">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" placeholder="Tell me more..."></textarea>
+        </div>
+        <button class="form-submit" id="form-submit-btn" onclick="handleFormSubmit(event)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send message
+        </button>
+        <p style="font-size:11px;color:var(--muted);margin-top:12px;text-align:center;">
+          This will open your email client with the message pre-filled.
+        </p>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="success-icon">✉️</div>
+        <h4>Message ready!</h4>
+        <p>Your email client has opened with the message pre-filled.<br/>Just hit send!</p>
+        <button class="btn btn-ghost" style="margin:20px auto 0;display:flex;" onclick="resetForm()">Send another</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="connect-inner">
+    <h2 class="connect-title">Let's connect</h2>
+    <p class="connect-sub">Always open to collaborations, projects, or just a good conversation about math and data.</p>
+    <div class="connect-links">
+      <a class="connect-link" href="https://github.com/ayatimathur3" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.37.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.48 1 .1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.65 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a class="connect-link" href="https://www.linkedin.com/in/ayatimathur03/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built by Ayati Mathur · 2026 · <a href="https://github.com/ayatimathur3" style="color:var(--accent);text-decoration:none;">@ayatimathur3</a>
+</footer>
+
+<script>
+// ---- GITHUB LIVE DATA ----
+const GITHUB_USER = 'ayatimathur3';
+
+const LANG_ICONS = {
+  Python: '🐍', JavaScript: '🟨', Jupyter: '📓', HTML: '🌐',
+  CSS: '🎨', TypeScript: '🔷', R: '📊', Java: '☕', null: '📁'
+};
+
+async function loadGitHub() {
+  try {
+    const [userRes, reposRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USER}`),
+      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=6`)
+    ]);
+
+    if (userRes.ok) {
+      const u = await userRes.json();
+      document.getElementById('gh-repos').textContent = u.public_repos ?? '—';
+      document.getElementById('gh-followers').textContent = u.followers ?? '—';
+      document.getElementById('gh-following').textContent = u.following ?? '—';
+    }
+
+    const grid = document.getElementById('projects-grid');
+
+    if (reposRes.ok) {
+      const repos = await reposRes.json();
+      if (!repos.length) {
+        grid.innerHTML = `<p class="no-repos-msg">No public repositories yet — check back soon!</p>`;
+        return;
+      }
+      grid.innerHTML = '';
+      repos.forEach(r => {
+        const icon = LANG_ICONS[r.language] || '📁';
+        const card = document.createElement('a');
+        card.className = 'project-card';
+        card.href = r.html_url;
+        card.target = '_blank';
+        card.rel = 'noopener';
+        card.innerHTML = `
+          <div class="project-card-top">
+            <span class="project-icon">${icon}</span>
+            ${r.language ? `<span class="project-lang">${r.language}</span>` : ''}
+          </div>
+          <div class="project-name">${r.name}</div>
+          <div class="project-desc">${r.description || 'No description provided.'}</div>
+          <div class="project-footer">
+            <span class="star-count">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="opacity:.6"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ${r.stargazers_count}
+            </span>
+            <span>Updated ${new Date(r.updated_at).toLocaleDateString('en-GB',{month:'short',year:'numeric'})}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    } else {
+      grid.innerHTML = `<p class="no-repos-msg">Couldn't load repos right now — <a href="https://github.com/ayatimathur3" style="color:var(--accent)">view on GitHub</a>.</p>`;
+    }
+  } catch(e) {
+    document.getElementById('projects-grid').innerHTML =
+      `<p class="no-repos-msg">Couldn't reach GitHub — <a href="https://github.com/ayatimathur3" style="color:var(--accent)">view on GitHub</a>.</p>`;
+  }
+}
+
+loadGitHub();
+
+// ---- RESUME BUTTON ----
+// To enable: replace RESUME_URL with a direct link to your PDF (Google Drive, Dropbox, etc.)
+const RESUME_URL = null; // e.g. 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID'
+const resumeBtn = document.getElementById('resume-btn');
+if (RESUME_URL) {
+  resumeBtn.href = RESUME_URL;
+  resumeBtn.download = 'Ayati_Mathur_Resume.pdf';
+  resumeBtn.target = '_blank';
+} else {
+  resumeBtn.classList.add('disabled');
+  resumeBtn.addEventListener('click', e => {
+    e.preventDefault();
+    alert('Resume coming soon! Check back shortly.');
+  });
+}
+
+// ---- CONTACT FORM ----
+// Uses mailto: — works without a backend. Replace EMAIL below with your address.
+const CONTACT_EMAIL = 'ayatimathur3@example.com'; // ← replace with your real email
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const subject = document.getElementById('f-subject').value.trim();
+  const msg     = document.getElementById('f-msg').value.trim();
+
+  if (!name || !email || !msg) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+
+  const body = `Hi Ayati,\n\n${msg}\n\n—${name}\n${email}`;
+  const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject || 'Portfolio enquiry')}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailto;
+
+  setTimeout(() => {
+    document.getElementById('form-fields').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }, 400);
+}
+
+function resetForm() {
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-subject').value = '';
+  document.getElementById('f-msg').value = '';
+  document.getElementById('form-fields').style.display = 'block';
+  document.getElementById('form-success').style.display = 'none';
+}
+</script>
+</body>
+</html>
